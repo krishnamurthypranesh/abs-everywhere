@@ -1,0 +1,157 @@
+{
+    "Exercises": [
+      {
+        "name": "Kettlebell Swing",
+        "start_date": "2021-03-01",
+        "instrument": "Kettlebell",
+        "mass": 14000,
+        "reps": 10,
+        "baseline": {
+          "set": 6,
+          "time": 360
+        },
+        "target": {
+          "set": 20,
+          "time": 1200
+        },
+        "days": [
+          "tuesday",
+          "friday"
+        ],
+        "bilateral": true,
+        "exercise_type": "Ballistic",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.5
+        },
+        "training_method": "EMOM" 
+      },
+      {
+        "name": "Kettlebell Clean",
+        "start_date": "2021-03-01",
+        "instrument": "Kettlebell",
+        "mass": 14000,
+        "reps": 5,
+        "baseline": {
+          "set": 5,
+          "time": 360
+        },
+        "target": {
+          "set": 20,
+          "time": 3200
+        },
+        "days": [
+          "tuesday",
+          "friday"
+        ],
+        "bilateral": false,
+        "type": "Ballistic",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.5
+        }
+      },
+      {
+        "name": "Kettlebell Clean and Press",
+        "start_date": "2021-03-01",
+        "instrument": "Kettlebell",
+        "mass": 14000,
+        "reps": 3,
+        "baseline": {
+          "set": 3,
+          "time": 360
+        },
+        "target": {
+          "set": 6,
+          "time": 720
+        },
+        "days": [
+          "monday",
+          "thursday"
+        ],
+        "bilateral": false,
+        "type": "Grind",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.167
+        },
+        "exercise_type": "Grind",
+        "training_method": "Strength"
+      },
+      {
+        "name": "Turkish Get Up",
+        "start_date": "2021-03-01",
+        "instrument": "Kettlebell",
+        "mass": 14000,
+        "reps": 1,
+        "baseline": {
+          "set": 1,
+          "time": 180
+        },
+        "target": {
+          "set": 2,
+          "time": 360
+        },
+        "days": [
+          "monday",
+          "thursday"
+        ],
+        "bilateral": false,
+        "type": "Grind",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.125
+        }
+      },
+      {
+        "name": "Single Deck Squat",
+        "start_date": "2021-03-01",
+        "instrument": "Kettlebell",
+        "mass": 14000,
+        "reps": 5,
+        "baseline": {
+          "set": 4,
+          "time": 360
+        },
+        "target": {
+          "set": 20,
+          "time": 1800
+        },
+        "days": [
+          "monday",
+          "thursday"
+        ],
+        "bilateral": false,
+        "type": "Grind",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.167
+        }
+      },
+      {
+        "name": "Single Handed Shield Case",
+        "start_date": "2021-03-01",
+        "instrument": "Heavy Club",
+        "mass": 5000,
+        "reps": 10,
+        "baseline": {
+          "set": 5,
+          "time": 300
+        },
+        "target": {
+          "set": 10,
+          "time": 600
+        },
+        "days": [
+          "tuesday",
+          "friday"
+        ],
+        "bilateral": true,
+        "type": "Ballistic",
+        "progression": {
+          "unit": "sets/session",
+          "value": 0.33
+        }
+      }
+    ]
+  }
