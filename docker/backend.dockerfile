@@ -11,3 +11,6 @@ RUN yum install -y nodejs
 
 # Create working directories for the application
 RUN mkdir /app
+
+# Set working directory
+WORKDIR /app
