@@ -1,9 +1,11 @@
+import * as fs from "fs";
+import * as util from "util";
+
+const writeFile = util.promisify(fs.writeFile);
+
 import { daysOfTheWeek } from "./timelines.js";
 
-export function generateCSV(exerciseData, totalWeeks, firstDates, programmeDates, setsForWeek) {
-  // ultimately, this function should generate the csv for the entire thing
-  // for now [read as: Until I figure out how to generate the csv], I'll return
-  // an array of arrays containing all the required data
+export function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsForWeek) {
   let data = new Array((totalWeeks * exerciseData.days.length) + 1);
   const COLUMNS = ["Sl No", "Week Number", "Date", "Day",
     "Exercise", "Instrument", "Mass", "Sets", "Reps", "Exercise Type",
@@ -32,7 +34,7 @@ export function generateCSV(exerciseData, totalWeeks, firstDates, programmeDates
       // calcuate wc
       workCapacity = sets * reps * mass;
 
-      var row = [slNo, weekNumber, date, day, exercise, instrument, mass,
+      var row = [slNo, weekNumber, date.toISOString(), day, exercise, instrument, mass,
       sets, reps, exerciseType, trainingMethod, workCapacity, ""]
 
       data[slNo] = row;
@@ -41,4 +43,26 @@ export function generateCSV(exerciseData, totalWeeks, firstDates, programmeDates
     weekNumber += 1;
   }
   return data;
+}
+
+export function formatCSVData(programmeData) {
+  let dataString = "";
+  var temp = "";
+  for (var i=0; i < programmeData.length; i++) {
+    temp = "";
+    for (var j=0; j < programmeData[i].length; j++) {
+      temp += programmeData[i][j] + ",";
+    }
+    temp += "\n";
+    dataString += temp;
+  }
+  return dataString;
+}
+
+export async function programmeToCSV(csvData) {
+  try {
+    await writeFile("targets/programmeData.csv", csvData);
+  } catch (err) {
+    console.log(err);
+  }
 }

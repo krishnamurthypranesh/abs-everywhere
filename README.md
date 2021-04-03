@@ -4,7 +4,7 @@ A webapp to generate programmes based on [volume cycles by Mark Wildman {who lea
 It's still in the making. A lot of stuff to go.
 
 # To do
-* Convert entire programme data to csv
+* ~~Convert entire programme data to csv~~
 * Add load variance for each session [Basically, lifting heavy in one session and light on the other]
 
    * Add work capacity (WC) calculations

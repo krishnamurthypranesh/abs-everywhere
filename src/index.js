@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { getFirstSessionDate, getProgrammeDates } from "./timelines.js";
-import { generateCSV } from "./data.js";
+import { generateProgrammeData, formatCSVData, programmeToCSV } from "./data.js";
 
 let data = JSON.parse(fs.readFileSync("data/sample.json"));
 let exerciseProgrammes = new Array(data.Exercises.length);
@@ -46,9 +46,9 @@ for (var index=0; index < data.Exercises.length; index++) {
     firstDates[exercise.days[i]]);
   }
 
-  var exerciseProgrammeData = generateCSV(exercise, totalWeeks, firstDates,
+  var exerciseProgrammeData = generateProgrammeData(exercise, totalWeeks,
     programmeDates, setsForWeek)
   exerciseProgrammes[index] = exerciseProgrammeData;
 }
 
-console.log(exerciseProgrammes[2]);
+programmeToCSV(formatCSVData(exerciseProgrammes[0]));
