@@ -45,7 +45,7 @@ export function generateProgrammeData(exerciseData, totalWeeks, programmeDates, 
   return data;
 }
 
-export function formatCSVData(programmeData) {
+function formatCSVData(programmeData) {
   let dataString = "";
   var temp = "";
   for (var i=0; i < programmeData.length; i++) {
@@ -59,8 +59,9 @@ export function formatCSVData(programmeData) {
   return dataString;
 }
 
-export async function programmeToCSV(csvData) {
+export async function programmeToCSV(programmeData) {
   try {
+    var csvData = formatCSVData(programmeData);
     await writeFile("targets/programmeData.csv", csvData);
   } catch (err) {
     console.log(err);
