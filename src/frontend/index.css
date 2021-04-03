@@ -1,0 +1,29 @@
+.hide {
+    display: none;
+}
+
+.form-element {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+}
+
+input[type=text]{
+    margin: 5px 5px 5px 5px;
+    border: 1px solid black;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius: 5px;
+    width: 10%;
+}
+
+.form-radio {
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+}
+
+input[type=date] {
+    display: block;
+    margin-bottom: 4px;
+    position: relative;
+}

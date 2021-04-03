@@ -1,0 +1,120 @@
+<! doctype html>
+<html>
+    <head>
+        <title>Abs Everywhere!</title>
+        <link rel="stylesheet" href="index.css">
+
+        <script src="index.js"></script>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>Abs Everywhere!</h1>
+        <!-- Links to different pages-->
+        <button id="new-volume-cycle">New Volume Cycle Programme</button>
+
+        <div class="hide" id="volume-cycle-form-container">
+            <form id="volume-cycle-form">
+                <span class="form-element">
+                    <input type="text" name="exercise_name" placeholder="Exercise Name"/>
+                </span>
+
+                <span class="form-element">
+                    <label>Start Date
+                        <input type="date" name="start_date" />
+                    </label>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="equipment" placeholder="Equipment Used"/>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="mass" placeholder="Mass"/>
+                    <select name="unit">
+                        <option value="kilograms">Kg</option>
+                        <option value="pounds">lb</option>
+                    </select>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="reps" placeholder="Reps per set"/>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="baseline_sets" placeholder="Baseline Sets"/>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="target_sets" placeholder="Target Sets"/>
+                </span>
+
+                <span class="form-element">
+                    <!-- Turn this into a checkbox -->
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="monday"/>
+                        Monday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="tuesday"/>
+                        Tuesday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="wednesday"/>
+                        Wednesday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="thursday"/>
+                        Thursday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="friday"/>
+                        Friday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="saturday"/>
+                        Saturday
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="days" value="sunday"/>
+                        Sunday
+                    </label>
+                </span>
+
+                <span class="form-element">Loading:
+                    <label class="form-radio"> <input type="radio" name="loading" value="bilateral"/> Bilateral</label>
+                    <label class="form-radio"> <input type="radio" name="loading" value="unilateral"/>Unilateral</label>
+                </span>
+
+                <!-- This should be a dropdown with three values: Ballistic and Grind -->
+                <span class="form-element">
+                    <label for="exercise_type">Exercise Type:
+                        <select name="exercise_type">
+                            <option value="ballistic">Ballistic</option>
+                            <option value="grind">Grind</option>
+                        </select>
+                    </label>
+                </span>
+
+                <span class="form-element">
+                    <input type="text" name="progression" placeholder="Progression (sets/session)"/>
+                </span>
+
+                <span class="form-element">
+                    <label>Training Method:
+                        <select name="training_method">
+                            <option value="EMOM">EMOM</option>
+                            <option value="No Rest">No Rest</option>
+                            <!-- If with rest is selected, then another field for indicating the rest
+                                period in minutes should be shown-->
+                            <option value="With Rest">With Rest</option>
+                        </select>
+                    </label>
+                </span>
+            </form>
+            <button type="submit" form="volume-cycle-form" value="Submit">Submit</button>
+        </div>
+
+        <!-- After submission of the form, on a successful reply from the server
+        which will contain the programme data itself, display it as a table-->
+    </body>
+</html>
