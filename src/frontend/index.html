@@ -14,21 +14,20 @@
 
         <div class="hide" id="volume-cycle-form-container">
             <form id="volume-cycle-form">
-                <span class="form-element">
+                <span class="form-element" for="exercise_name">
                     <input type="text" name="exercise_name" placeholder="Exercise Name"/>
                 </span>
 
-                <span class="form-element">
-                    <label>Start Date
+                <span class="form-element" for="start_date">
+                    Start Date
                         <input type="date" name="start_date" />
-                    </label>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="equipment">
                     <input type="text" name="equipment" placeholder="Equipment Used"/>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="mass">
                     <input type="text" name="mass" placeholder="Mass"/>
                     <select name="unit">
                         <option value="kilograms">Kg</option>
@@ -36,57 +35,63 @@
                     </select>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="reps">
                     <input type="text" name="reps" placeholder="Reps per set"/>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="baseline_sets">
                     <input type="text" name="baseline_sets" placeholder="Baseline Sets"/>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="target_sets">
                     <input type="text" name="target_sets" placeholder="Target Sets"/>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="days">
                     <!-- Turn this into a checkbox -->
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="monday"/>
                         Monday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="tuesday"/>
                         Tuesday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="wednesday"/>
                         Wednesday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="thursday"/>
                         Thursday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="friday"/>
                         Friday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="saturday"/>
                         Saturday
                     </label>
+
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="sunday"/>
                         Sunday
                     </label>
                 </span>
 
-                <span class="form-element">Loading:
+                <span class="form-element" for="loading">Loading:
                     <label class="form-radio"> <input type="radio" name="loading" value="bilateral"/> Bilateral</label>
                     <label class="form-radio"> <input type="radio" name="loading" value="unilateral"/>Unilateral</label>
                 </span>
 
                 <!-- This should be a dropdown with three values: Ballistic and Grind -->
-                <span class="form-element">
+                <span class="form-element" for="exercise_type">
                     <label for="exercise_type">Exercise Type:
                         <select name="exercise_type">
                             <option value="ballistic">Ballistic</option>
@@ -95,11 +100,11 @@
                     </label>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="progression">
                     <input type="text" name="progression" placeholder="Progression (sets/session)"/>
                 </span>
 
-                <span class="form-element">
+                <span class="form-element" for="training_method">
                     <label>Training Method:
                         <select name="training_method">
                             <option value="EMOM">EMOM</option>
