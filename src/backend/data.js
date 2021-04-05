@@ -1,11 +1,11 @@
-import * as fs from "fs";
-import * as util from "util";
+const fs = require("fs");
+const util = require("util");
 
 const writeFile = util.promisify(fs.writeFile);
 
-import { daysOfTheWeek } from "./timelines.js";
+const daysOfTheWeek = require("./timelines.js").daysOfTheWeek;
 
-export function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsForWeek) {
+function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsForWeek) {
   let data = new Array((totalWeeks * exerciseData.days.length) + 1);
   const COLUMNS = ["Sl No", "Week Number", "Date", "Day",
     "Exercise", "Instrument", "Mass", "Sets", "Reps", "Exercise Type",
@@ -59,7 +59,7 @@ function formatCSVData(programmeData) {
   return dataString;
 }
 
-export async function programmeToCSV(programmeData) {
+async function programmeToCSV(programmeData) {
   try {
     var csvData = formatCSVData(programmeData);
     await writeFile("targets/programmeData.csv", csvData);
@@ -67,3 +67,6 @@ export async function programmeToCSV(programmeData) {
     console.log(err);
   }
 }
+
+exports.generateProgrammeData = generateProgrammeData;
+exports.programmeToCSV = programmeToCSV;
