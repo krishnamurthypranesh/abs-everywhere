@@ -62,14 +62,6 @@ Programme.prototype.render = function () {
 }
 
 
-// HELPER FUNCTIONS
-function getXHRObject(method, url) {
-  let xhr = new XMLHttpRequest();
-  xhr.open(method, url);
-
-  return xhr;
-}
-
 // function to toggle element display
 function toggleDisplay(element) {
   if (element.classList.contains("hide")) {

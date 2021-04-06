@@ -3,7 +3,55 @@ const util = require("util");
 
 const writeFile = util.promisify(fs.writeFile);
 
-const daysOfTheWeek = require("./timelines.js").daysOfTheWeek;
+const daysOfTheWeek = require("./timelines.js");
+
+function calculateWorkCapacity(sets, reps, mass) {
+  return sets * reps * mass;
+}
+
+function getSetsForWeek(exercise) {
+  var currentWC, currentWeek, totalWeeks, setsForWeek, targetWC;
+
+  setsForWeek = new Object();
+  currentWeek = 1;
+  totalWeeks = 0;
+
+  currentWC = calculateWorkCapacity(exercise.baseline_sets,
+  exercise.reps, exercise.mass.value);
+  targetWC = calculateWorkCapacity(exercise.target_sets,
+  exercise.reps, exercisemass.value);
+
+
+  setsForWeek[currentWeek] = exercise.baseline_sets;
+
+  while (currentWC < targetWC) {
+    currentWeek += 1;
+    totalWeeks += 1;
+    setsForWeek[currentWeek] = (setsForWeek[currentWeek - 1] +
+    (exercise.days.length * exercise.progression.value));
+    currentWC = setsForWeek[currentWeek] * exercise.reps * exercise.mass.value;
+  }
+  return setsForWeek;
+}
+
+function getVolumeCycle(exercise, setsForWeek) {
+  let firstDates, startDate, programmeDates;
+
+  startDate = new Date(Date.parse(exercise.start_date));
+
+  for (var i=0; i < exercise.days.length; i++) {
+    firstDates[exercise.days[i]] = timelines.getFirstSessionDate(startDate,
+      exercise.days[i]);
+  }
+
+  programmeDates = new Object();
+  for (var i=0; i < exercise.days.length; i++) {
+    programmeDates[exercise.days[i]] = timelines.getProgrammeDates(
+      Object.keys(setsForWeek).length, firstDates[exercise.days[i]]);
+  }
+
+  return programmeDates;
+}
 
 function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsForWeek) {
   let data = new Array((totalWeeks * exerciseData.days.length) + 1);
@@ -45,7 +93,7 @@ function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsFor
   return data;
 }
 
-function formatCSVData(programmeData) {
+function formatCSVDataString(programmeData) {
   let dataString = "";
   var temp = "";
   for (var i=0; i < programmeData.length; i++) {
@@ -59,9 +107,9 @@ function formatCSVData(programmeData) {
   return dataString;
 }
 
-async function programmeToCSV(programmeData) {
+async function writeProgrammeToCSV(programmeData) {
   try {
-    var csvData = formatCSVData(programmeData);
+    var csvData = formatCSVDataString(programmeData);
     await writeFile("targets/programmeData.csv", csvData);
   } catch (err) {
     console.log(err);
@@ -69,4 +117,4 @@ async function programmeToCSV(programmeData) {
 }
 
 exports.generateProgrammeData = generateProgrammeData;
-exports.programmeToCSV = programmeToCSV;
+exports.writeProgrammeToCSV = writeProgrammeToCSV;

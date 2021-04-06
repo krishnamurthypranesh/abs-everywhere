@@ -22,4 +22,4 @@ WORKDIR /srv/app
 
 EXPOSE 8000
 
-# CMD ["node", "index.js"]
+CMD ["node", "app.js"]
