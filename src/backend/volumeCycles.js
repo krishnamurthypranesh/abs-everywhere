@@ -3,7 +3,7 @@ const util = require("util");
 
 const writeFile = util.promisify(fs.writeFile);
 
-const daysOfTheWeek = require("./timelines.js");
+const timelines = require("./timelines.js");
 
 function calculateWorkCapacity(sets, reps, mass) {
   return sets * reps * mass;
@@ -19,7 +19,7 @@ function getSetsForWeek(exercise) {
   currentWC = calculateWorkCapacity(exercise.baseline_sets,
   exercise.reps, exercise.mass.value);
   targetWC = calculateWorkCapacity(exercise.target_sets,
-  exercise.reps, exercisemass.value);
+  exercise.reps, exercise.mass.value);
 
 
   setsForWeek[currentWeek] = exercise.baseline_sets;
@@ -28,14 +28,15 @@ function getSetsForWeek(exercise) {
     currentWeek += 1;
     totalWeeks += 1;
     setsForWeek[currentWeek] = (setsForWeek[currentWeek - 1] +
-    (exercise.days.length * exercise.progression.value));
+    (exercise.days.length * exercise.progression));
     currentWC = setsForWeek[currentWeek] * exercise.reps * exercise.mass.value;
   }
-  return setsForWeek;
+  return [setsForWeek, totalWeeks];
 }
 
 function getVolumeCycle(exercise, setsForWeek) {
-  let firstDates, startDate, programmeDates;
+  let firstDates = new Object();
+  let startDate, programmeDates;
 
   startDate = new Date(Date.parse(exercise.start_date));
 
@@ -65,8 +66,8 @@ function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsFor
   var reps, exerciseType, trainingMethod, exercise, instrument, mass,
     workCapacity, sets, date, day;
 
-  exercise = exerciseData.name;
-  instrument = exerciseData.instrument;
+  exercise = exerciseData.exercise_name;
+  instrument = exerciseData.equipment;
   mass = exerciseData.mass;
   reps = exerciseData.reps;
   exerciseType = exerciseData.exercise_type;
@@ -76,13 +77,14 @@ function generateProgrammeData(exerciseData, totalWeeks, programmeDates, setsFor
     sets = Math.floor(setsForWeek[weekNumber]);
     for (var i=0; i < exerciseData.days.length; i++) {
       // get date
-      date = programmeDates[exerciseData.days[i]][weekNumber - 1];
+      date = programmeDates[exerciseData.days[i]][weekNumber];
       // get day
-      day = daysOfTheWeek[date.getDay()];
+      day = timelines.daysOfTheWeek[date.getDay()];
       // calcuate wc
-      workCapacity = sets * reps * mass;
+      workCapacity = sets * reps * mass.value;
 
-      var row = [slNo, weekNumber, date.toISOString(), day, exercise, instrument, mass,
+      var row = [slNo, weekNumber, date.toISOString(), day, exercise, instrument,
+        mass.value + " " + mass.unit,
       sets, reps, exerciseType, trainingMethod, workCapacity, ""]
 
       data[slNo] = row;
@@ -116,5 +118,7 @@ async function writeProgrammeToCSV(programmeData) {
   }
 }
 
+exports.getSetsForWeek = getSetsForWeek;
+exports.getVolumeCycle = getVolumeCycle;
 exports.generateProgrammeData = generateProgrammeData;
 exports.writeProgrammeToCSV = writeProgrammeToCSV;

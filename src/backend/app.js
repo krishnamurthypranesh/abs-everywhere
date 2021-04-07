@@ -1,7 +1,8 @@
 // imports
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
-const volumeCycles = require("./data.js");
+const volumeCycles = require("./volumeCycles.js");
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -9,10 +10,25 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const port = 8000;
 
+app.use(cors());
+
 app.post("/programme/generate/", jsonParser, (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  console.log(req.body);
-  res.send("Hello, world.");
+  let setsForWeek, toalWeeks, cycleDates, programme;
+
+  exercise = req.body;
+  exercise.mass.value = parseInt(exercise.mass.value);
+  exercise.reps = parseInt(exercise.reps);
+  exercise.baseline_sets = parseInt(exercise.baseline_sets);
+  exercise.target_sets = parseInt(exercise.target_sets);
+  exercise.progression = parseFloat(exercise.progression);
+
+  [setsForWeek, totalWeeks] = volumeCycles.getSetsForWeek(exercise);
+
+  cycleDates = volumeCycles.getVolumeCycle(exercise, setsForWeek);
+  programme = volumeCycles.generateProgrammeData(exercise, totalWeeks,
+    cycleDates, setsForWeek);
+  res.send(JSON.stringify(programme));
+
 })
 
 app.get("/", (req, res) => {

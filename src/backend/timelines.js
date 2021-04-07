@@ -29,11 +29,11 @@ function getFirstSessionDate(startDate, firstSessionDay) {
 }
 
 function getProgrammeDates(totalWeeks, firstSessionDate) {
-  var weekNumber = 1;
-  var dates = new Array(totalWeeks);
+  var weekNumber = 2;
+  var dates = new Object();
   var currDate;
-  dates[0] = firstSessionDate;
-  while (weekNumber <= totalWeeks + 1) {
+  dates[1] = firstSessionDate;
+  while (weekNumber <= totalWeeks) {
     currDate = new Date(firstSessionDate.getTime() +
     (weekNumber * 7 * 24 * 3600 * 1000));
     dates[weekNumber] = currDate;

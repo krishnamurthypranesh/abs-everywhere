@@ -2,13 +2,38 @@ const KEY = "";
 
 function Programme(formElement) {
   this.form = formElement;
-  // other definitions go here
+  this.formData = new Object();
+  this.programme = new Array();
 }
 
-Programme.prototype.getProgramme = function () {
-  // validate form data, send data to the backend and receive programme data
+Programme.prototype.fetchProgramme = function () {
+  var programmeData;
+
+  function fetchFromBackend(formData) {
+    fetch("http://localhost:8000/programme/generate/",
+      {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+      }).then(function (data) {
+        return data;
+      }).catch(function (error) {
+        console.warn("Something went wrong.", error);
+      })
+  }
+  fetchFromBackend(this.formData)
+}
+
+
+Programme.prototype.validateFormData = function () {
   let formData = new Object();
-  var name, value, formElement;
+  var name, value, formElement, programme;
 
   for (var i=0; i < this.form.children.length; i++) {
     formElement = this.form.children[i];
@@ -30,35 +55,31 @@ Programme.prototype.getProgramme = function () {
 
     formData[name] = value;
   }
-  console.log(formData);
-
-  // fetch programme data from backend
-  fetch("http://localhost:9000/programme/generate/",
-    {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Content-Type": "application/json",
-      }
-    }).then(function (response) {
-      if (response.ok) {
-        console.log(response.json);
-      }
-      return Promise.reject(response);
-    }).then(function (data) {
-      console.log(data);
-    }).catch(function (error) {
-      console.warn("Something went wrong.", error);
-    })
-}
-
-
-Programme.prototype.validateFormData = function () {
-  // validate the form element, raise alerts and errors as and when requried
+  this.formData = formData;
 }
 
 Programme.prototype.render = function () {
   // render the programme data received from the backend as a table
+
+  let tableBody, tableRow, tableCell, row;
+  this.elem = document.createElement("table");
+
+  tableBody = document.createElement("tbody");
+  this.elem.appendChild(tableBody);
+
+  for (var i=0; i < this.programme.length; i++) {
+    row = this.programme[i];
+    tableRow = document.createElement("tr");
+
+    for (var j=0; j < row.length; j++) {
+      tableCell = document.createElement("td");
+      tableCell.innerText = row[j];
+
+      tableRow.appendChild(tableCell);
+    }
+    tableBody.appendChild(tableRow);
+  }
+  document.getElementById("programme-table-container").appendChild(this.elem);
 }
 
 
@@ -84,7 +105,11 @@ function init() {
   document.getElementById("volume-cycle-form-container").children[1].addEventListener(
   "click", event => {
     event.preventDefault();
-    programme.getProgramme();
+    programme.validateFormData();
+    programme.fetchProgramme();
+    programme.render();
+    toggleDisplay(programme.form);
+    toggleDisplay(document.getElementById("programme-table-container"));
   })
 }
 
