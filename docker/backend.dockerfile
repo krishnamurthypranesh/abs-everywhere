@@ -22,4 +22,6 @@ WORKDIR /srv/app
 
 EXPOSE 8000
 
-CMD ["node", "app.js"]
+RUN ls
+
+CMD node app.js
