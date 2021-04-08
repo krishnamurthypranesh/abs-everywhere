@@ -6,6 +6,22 @@ function Programme(formElement) {
   this.programme = new Array();
 }
 
+
+async function fetchProgramme(formData) {
+  let response;
+
+  response = await fetch(
+    "http://localhost:8000/programme/generate/",
+    {
+      method: "POST", 
+      body: JSON.stringify(formData),
+      headers: {"Content-Type": "application/json"},
+    })
+
+  return await response.json();
+}
+
+
 Programme.prototype.fetchProgramme = function () {
   var programmeData;
 
@@ -58,17 +74,17 @@ Programme.prototype.validateFormData = function () {
   this.formData = formData;
 }
 
-Programme.prototype.render = function () {
+function render (programmeData) {
   // render the programme data received from the backend as a table
 
   let tableBody, tableRow, tableCell, row;
-  this.elem = document.createElement("table");
+  elem = document.createElement("table");
 
   tableBody = document.createElement("tbody");
-  this.elem.appendChild(tableBody);
+  elem.appendChild(tableBody);
 
-  for (var i=0; i < this.programme.length; i++) {
-    row = this.programme[i];
+  for (var i=0; i < programmeData.length; i++) {
+    row = programmeData[i];
     tableRow = document.createElement("tr");
 
     for (var j=0; j < row.length; j++) {
@@ -79,7 +95,7 @@ Programme.prototype.render = function () {
     }
     tableBody.appendChild(tableRow);
   }
-  document.getElementById("programme-table-container").appendChild(this.elem);
+  return elem;
 }
 
 
@@ -105,10 +121,19 @@ function init() {
   document.getElementById("volume-cycle-form-container").children[1].addEventListener(
   "click", event => {
     event.preventDefault();
+
+    toggleDisplay(programme.form.parentElement);
+
     programme.validateFormData();
-    programme.fetchProgramme();
-    programme.render();
-    toggleDisplay(programme.form);
+
+    fetchProgramme(programme.formData).
+      then(data => {
+        const table = render(data);
+        programme.table = table;
+        document.getElementById("programme-table-container").
+          appendChild(programme.table);
+    });
+
     toggleDisplay(document.getElementById("programme-table-container"));
   })
 }

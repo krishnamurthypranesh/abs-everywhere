@@ -28,11 +28,14 @@ app.post("/programme/generate/", jsonParser, (req, res) => {
   programme = volumeCycles.generateProgrammeData(exercise, totalWeeks,
     cycleDates, setsForWeek);
   res.send(JSON.stringify(programme));
+})
 
+app.post("/test/", jsonParser, (req, res) => {
+  console.log(`Request body: ${JSON.stringify(req.body)}`);
+  res.send(JSON.stringify(req.body));
 })
 
 app.get("/", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
   res.send("Hello world");
 })
 

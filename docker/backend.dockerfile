@@ -24,4 +24,4 @@ EXPOSE 8000
 
 RUN ls
 
-CMD node app.js
+CMD nodemon app.js
