@@ -8,6 +8,16 @@
     padding: 5px;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#programme-table-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 input[type=text]{
     margin: 5px 5px 5px 5px;
     border: 1px solid black;
@@ -26,4 +36,43 @@ input[type=date] {
     display: block;
     margin-bottom: 4px;
     position: relative;
+}
+
+th, td {
+  position: relative;
+  border: 2px solid grey;
+  border-radius: 5px;
+  margin: 1px 1px 1px 1px;
+  padding: 4px;
+}
+
+tr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+
+table {
+  overflow: hidden;
+  border-collapse: separate;
+  border: 4px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
+  margin-right:
+}
+
+tr:hover {
+  background-color: #e6e6e6;
+}
+
+td:hover::after,
+th:hover::after {
+  content: "";
+  position: absolute;
+  background-color: #e6e6e6;
+  left: 0;
+  top: -5000px;
+  height: 10000px;
+  width: 100%;
+  z-index: -1;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }

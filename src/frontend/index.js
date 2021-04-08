@@ -6,22 +6,6 @@ function Programme(formElement) {
   this.programme = new Array();
 }
 
-
-async function fetchProgramme(formData) {
-  let response;
-
-  response = await fetch(
-    "http://localhost:8000/programme/generate/",
-    {
-      method: "POST", 
-      body: JSON.stringify(formData),
-      headers: {"Content-Type": "application/json"},
-    })
-
-  return await response.json();
-}
-
-
 Programme.prototype.fetchProgramme = function () {
   var programmeData;
 
@@ -45,7 +29,6 @@ Programme.prototype.fetchProgramme = function () {
   }
   fetchFromBackend(this.formData)
 }
-
 
 Programme.prototype.validateFormData = function () {
   let formData = new Object();
@@ -74,10 +57,25 @@ Programme.prototype.validateFormData = function () {
   this.formData = formData;
 }
 
+
+async function fetchProgramme(formData) {
+  let response;
+
+  response = await fetch(
+    "http://localhost:8000/programme/generate/",
+    {
+      method: "POST", 
+      body: JSON.stringify(formData),
+      headers: {"Content-Type": "application/json"},
+    })
+
+  return await response.json();
+}
+
 function render (programmeData) {
   // render the programme data received from the backend as a table
 
-  let tableBody, tableRow, tableCell, row;
+  let tableBody, cellElement, tableCell, row, rowElement;
   elem = document.createElement("table");
 
   tableBody = document.createElement("tbody");
@@ -87,8 +85,14 @@ function render (programmeData) {
     row = programmeData[i];
     tableRow = document.createElement("tr");
 
+    if (i === 0) {
+      cellElement = "th";
+    } else {
+      cellElement = "td";
+    }
+
     for (var j=0; j < row.length; j++) {
-      tableCell = document.createElement("td");
+      tableCell = document.createElement(cellElement);
       tableCell.innerText = row[j];
 
       tableRow.appendChild(tableCell);
