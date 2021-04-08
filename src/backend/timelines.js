@@ -1,4 +1,4 @@
-export const daysOfTheWeek = {
+const daysOfTheWeek = {
     0: "sunday",
     1: "monday",
     2: "tuesday",
@@ -8,7 +8,7 @@ export const daysOfTheWeek = {
     6: "saturday"
   };
 
-export function getFirstSessionDate(startDate, firstSessionDay) {
+function getFirstSessionDate(startDate, firstSessionDay) {
   var start_date, offset, idx, firstSessionDate;
 
   idx = startDate.getDay();
@@ -28,12 +28,12 @@ export function getFirstSessionDate(startDate, firstSessionDay) {
   return firstSessionDate;
 }
 
-export function getProgrammeDates(totalWeeks, firstSessionDate) {
-  var weekNumber = 1;
-  var dates = new Array(totalWeeks);
+function getProgrammeDates(totalWeeks, firstSessionDate) {
+  var weekNumber = 2;
+  var dates = new Object();
   var currDate;
-  dates[0] = firstSessionDate;
-  while (weekNumber <= totalWeeks + 1) {
+  dates[1] = firstSessionDate;
+  while (weekNumber <= totalWeeks) {
     currDate = new Date(firstSessionDate.getTime() +
     (weekNumber * 7 * 24 * 3600 * 1000));
     dates[weekNumber] = currDate;
@@ -41,3 +41,7 @@ export function getProgrammeDates(totalWeeks, firstSessionDate) {
   }
   return dates;
 }
+
+exports.daysOfTheWeek = daysOfTheWeek;
+exports.getFirstSessionDate = getFirstSessionDate;
+exports.getProgrammeDates = getProgrammeDates;

@@ -1,8 +1,11 @@
-import * as fs from "fs";
-import { getFirstSessionDate, getProgrammeDates } from "./timelines.js";
-import { generateProgrammeData, programmeToCSV } from "./data.js";
+const fs = require("fs");
 
-let data = JSON.parse(fs.readFileSync("data/sample.json"));
+const dataMunger = require("./data.js");
+const timelines = require("./timelines.js");
+
+console.log(dataMunger);
+
+let data = JSON.parse(fs.readFileSync("sample.json"));
 let exerciseProgrammes = new Array(data.Exercises.length);
 
 for (var index=0; index < data.Exercises.length; index++) {
@@ -36,19 +39,19 @@ for (var index=0; index < data.Exercises.length; index++) {
   var firstDates = new Object()
 
   for (var i=0; i < exercise.days.length; i++) {
-    firstDates[exercise.days[i]] = getFirstSessionDate(startDate, exercise.days[i]);
+    firstDates[exercise.days[i]] = timelines.getFirstSessionDate(startDate, exercise.days[i]);
   }
 
   var programmeDates = new Object();
 
   for (var i=0; i < exercise.days.length; i++) {
-    programmeDates[exercise.days[i]] = getProgrammeDates(totalWeeks,
+    programmeDates[exercise.days[i]] = timelines.getProgrammeDates(totalWeeks,
     firstDates[exercise.days[i]]);
   }
 
-  var exerciseProgrammeData = generateProgrammeData(exercise, totalWeeks,
+  var exerciseProgrammeData = dataMunger.generateProgrammeData(exercise, totalWeeks,
     programmeDates, setsForWeek)
   exerciseProgrammes[index] = exerciseProgrammeData;
 }
 
-programmeToCSV(exerciseProgrammes[0]);
+console.log(exerciseProgrammes);

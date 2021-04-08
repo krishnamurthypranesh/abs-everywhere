@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  frontend:
+    build:
+      context: /home/peekaykun/Projects/general/Heavy-Weight-Swinging/js/
+      dockerfile: docker/frontend.dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ../src/frontend:/app
+
+  backend:
+    build:
+      context: /home/peekaykun/Projects/general/Heavy-Weight-Swinging/js/
+      dockerfile: docker/backend.dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../src/backend:/srv/app
+    env_file:
+      - ./.env
