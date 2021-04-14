@@ -6,7 +6,7 @@
     display: block;
     margin: 5px;
     padding: 5px;
-    width: 400px;
+    /*width: 400px;*/
 }
 
 .form-element input {
@@ -17,7 +17,7 @@ input[type=text]{
     border: 1px solid black;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius: 5px;
-    width: 30%;
+    width: 10%;
 }
 
 .form-radio {
@@ -73,9 +73,7 @@ td:hover, th:hover {
 }
 
 .app-button {
-    /*background: #a700fa;*/
     background: #0283bf;
-    /*background: #f26c29;*/
     border-radius: 4px;
     box-shadow: 2px 2px 2px -1px #0283bf;
     padding: auto;
@@ -83,7 +81,6 @@ td:hover, th:hover {
     color: white;
     height: 30px;
     width: 100px;
-
 }
 
 #export-button-wrapper {
@@ -100,6 +97,12 @@ td:hover, th:hover {
 }
 
 #new-volume-cycle {
-  height: 50px;
-  width: 300px;
+    height: 50px;
+    width: 300px;
+}
+
+#volue-cycle-form-container button {
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
 }
