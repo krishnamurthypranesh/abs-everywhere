@@ -6,6 +6,10 @@
     display: block;
     margin: 5px;
     padding: 5px;
+    width: 400px;
+}
+
+.form-element input {
 }
 
 input[type=text]{
@@ -13,7 +17,7 @@ input[type=text]{
     border: 1px solid black;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     border-radius: 5px;
-    width: 10%;
+    width: 30%;
 }
 
 .form-radio {
@@ -26,4 +30,76 @@ input[type=date] {
     display: block;
     margin-bottom: 4px;
     position: relative;
+}
+
+#volume-cycle-form-container {
+    width: 1000px;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+#programme-table-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.center{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    border-collapse: collapse;
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5);
+}
+
+td, th {
+    border-right: 1px solid black;
+}
+
+tr {
+    border: 1px solid black;
+    padding: 2px;
+    margin: 2px;
+}
+
+tr:hover {
+    background-color: #ededed;
+}
+
+td:hover, th:hover {
+    box-shadow: 0 4px 2px -3px rgba(0, 0, 0, 0.5);
+}
+
+.app-button {
+    /*background: #a700fa;*/
+    background: #0283bf;
+    /*background: #f26c29;*/
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px -1px #0283bf;
+    padding: auto;
+    border: 0px;
+    color: white;
+    height: 30px;
+    width: 100px;
+
+}
+
+#export-button-wrapper {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#export-csv-button {
+    width: 200px;
+    height: 38px;
+}
+
+#new-volume-cycle {
+  height: 50px;
+  width: 300px;
 }
