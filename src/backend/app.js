@@ -10,7 +10,10 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const port = 8000;
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:8080",
+}
+app.use(cors(corsOptions));
 
 app.post("/programme/generate/", jsonParser, (req, res) => {
   let setsForWeek, toalWeeks, cycleDates, programme;

@@ -6,6 +6,26 @@ function Programme(formElement) {
   this.programme = new Array();
 }
 
+
+async function fetchProgramme(formData) {
+  let response;
+
+  response = await fetch(
+    "http://localhost:8000/programme/generate/",
+    {
+      method: "POST", 
+      body: JSON.stringify(formData),
+      headers: {"Content-Type": "application/json"},
+    })
+
+  return await response.json();
+}
+
+async function fetchProgrammeCSV() {
+  // logic goes here
+}
+
+
 Programme.prototype.fetchProgramme = function () {
   var programmeData;
 
@@ -29,6 +49,7 @@ Programme.prototype.fetchProgramme = function () {
   }
   fetchFromBackend(this.formData)
 }
+
 
 Programme.prototype.validateFormData = function () {
   let formData = new Object();
@@ -57,25 +78,10 @@ Programme.prototype.validateFormData = function () {
   this.formData = formData;
 }
 
-
-async function fetchProgramme(formData) {
-  let response;
-
-  response = await fetch(
-    "http://localhost:8000/programme/generate/",
-    {
-      method: "POST", 
-      body: JSON.stringify(formData),
-      headers: {"Content-Type": "application/json"},
-    })
-
-  return await response.json();
-}
-
 function render (programmeData) {
   // render the programme data received from the backend as a table
 
-  let tableBody, cellElement, tableCell, row, rowElement;
+  let tableBody, tableRow, tableCell, row;
   elem = document.createElement("table");
 
   tableBody = document.createElement("tbody");
@@ -85,14 +91,8 @@ function render (programmeData) {
     row = programmeData[i];
     tableRow = document.createElement("tr");
 
-    if (i === 0) {
-      cellElement = "th";
-    } else {
-      cellElement = "td";
-    }
-
     for (var j=0; j < row.length; j++) {
-      tableCell = document.createElement(cellElement);
+      tableCell = document.createElement("td");
       tableCell.innerText = row[j];
 
       tableRow.appendChild(tableCell);
@@ -125,11 +125,8 @@ function init() {
   document.getElementById("volume-cycle-form-container").children[1].addEventListener(
   "click", event => {
     event.preventDefault();
-
     toggleDisplay(programme.form.parentElement);
-
     programme.validateFormData();
-
     fetchProgramme(programme.formData).
       then(data => {
         const table = render(data);
@@ -137,9 +134,14 @@ function init() {
         document.getElementById("programme-table-container").
           appendChild(programme.table);
     });
-
     toggleDisplay(document.getElementById("programme-table-container"));
+    toggleDisplay(document.getElementById("export-button-wrapper"));
   })
+
+  document.getElementById("export-csv-button").addEeventListener("click",
+    event => {
+      window.alert("Fetching data from backend"); 
+    });
 }
 
 // entrypoint
