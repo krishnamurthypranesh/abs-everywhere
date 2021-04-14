@@ -21,6 +21,10 @@ async function fetchProgramme(formData) {
   return await response.json();
 }
 
+async function fetchProgrammeCSV() {
+  // logic goes here
+}
+
 
 Programme.prototype.fetchProgramme = function () {
   var programmeData;
@@ -121,11 +125,8 @@ function init() {
   document.getElementById("volume-cycle-form-container").children[1].addEventListener(
   "click", event => {
     event.preventDefault();
-
     toggleDisplay(programme.form.parentElement);
-
     programme.validateFormData();
-
     fetchProgramme(programme.formData).
       then(data => {
         const table = render(data);
@@ -133,9 +134,14 @@ function init() {
         document.getElementById("programme-table-container").
           appendChild(programme.table);
     });
-
     toggleDisplay(document.getElementById("programme-table-container"));
+    toggleDisplay(document.getElementById("export-button-wrapper"));
   })
+
+  document.getElementById("export-csv-button").addEeventListener("click",
+    event => {
+      window.alert("Fetching data from backend"); 
+    });
 }
 
 // entrypoint
