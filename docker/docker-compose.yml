@@ -1,6 +1,13 @@
 version: "3.3"
 
 services:
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: abs_everywhere
+    container_name: abs_db
+
   frontend:
     build:
       context: /home/peekaykun/Projects/general/Heavy-Weight-Swinging/js/
@@ -9,6 +16,8 @@ services:
       - "8080:80"
     volumes:
       - ../src/frontend:/app
+    depends_on:
+      - backend
 
   backend:
     build:
@@ -20,3 +29,5 @@ services:
       - ../src/backend:/srv/app
     env_file:
       - ./.env
+    depends_on:
+      - db

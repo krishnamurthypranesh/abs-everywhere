@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const volumeCycles = require("./volumeCycles.js");
+const knex = require("./database.js").knex;
 
 const app = express();
 const jsonParser = bodyParser.json();
@@ -10,7 +11,10 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 
 const port = 8000;
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:8080",
+}
+app.use(cors(corsOptions));
 
 app.post("/programme/generate/", jsonParser, (req, res) => {
   let setsForWeek, toalWeeks, cycleDates, programme;
