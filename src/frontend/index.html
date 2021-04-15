@@ -8,9 +8,12 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h1>Abs Everywhere!</h1>
+        <h1 class="center">Abs Everywhere!</h1>
         <!-- Links to different pages-->
-        <button id="new-volume-cycle">New Volume Cycle Programme</button>
+        <div class="center">
+          <button id="new-volume-cycle" class="app-button">New Volume Cycle Programme</button>
+        </div>
+
 
         <div class="hide" id="volume-cycle-form-container">
             <form id="volume-cycle-form">
@@ -48,7 +51,6 @@
                 </span>
 
                 <span class="form-element" for="days">
-                    <!-- Turn this into a checkbox -->
                     <label class="checkbox-container">
                         <input type="checkbox" name="days" value="monday"/>
                         Monday
@@ -117,12 +119,16 @@
                 </span>
             </form>
 
-            <button type="submit" form="volume-cycle-form" value="Submit">Submit</button>
+            <button class="app-button center" type="submit" form="volume-cycle-form" value="Submit">Submit</button>
         </div>
 
         <!-- After submission of the form, on a successful reply from the server
         which will contain the programme data itself, display it as a table-->
         <div class="hide" id="programme-table-container">
+        </div>
+        
+        <div class="center hide" id="export-button-wrapper">
+          <button id="export-csv-button" class="app-button">Export as CSV</button>
         </div>
     </body>
 </html>
