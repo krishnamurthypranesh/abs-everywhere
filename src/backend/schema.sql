@@ -49,7 +49,7 @@ CREATE TYPE days_enum as ENUM ('monday', 'tuesday', 'wednesday',
 --
 CREATE TABLE "public".programme (
   id SERIAL PRIMARY KEY,
-  exercise VARCHAR(255) NOT NULL,
+  exercise_name VARCHAR(255) NOT NULL,
   equipment VARCHAR(255) NOT NULL,
   start_date DATE NOT NULL DEFAULT CURRENT_DATE,
   mass INTEGER NOT NULL,

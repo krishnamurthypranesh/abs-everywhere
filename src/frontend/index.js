@@ -128,20 +128,21 @@ function init() {
     toggleDisplay(programme.form.parentElement);
     programme.validateFormData();
     fetchProgramme(programme.formData).
-      then(data => {
-        const table = render(data);
-        programme.table = table;
-        document.getElementById("programme-table-container").
-          appendChild(programme.table);
+      then((data) => {
+        console.log(JSON.stringify(data));
+        window.alert(`The programme was generated successfully`);
+        // const table = render(data);
+        // programme.table = table;
+        // document.getElementById("programme-table-container").
+        //   appendChild(programme.table);
     });
-    toggleDisplay(document.getElementById("programme-table-container"));
     toggleDisplay(document.getElementById("export-button-wrapper"));
   })
 
-  document.getElementById("export-csv-button").addEeventListener("click",
-    event => {
-      window.alert("Fetching data from backend"); 
-    });
+  // document.getElementById("export-csv-button").addEeventListener("click",
+  //   event => {
+  //     window.alert("Fetching data from backend"); 
+  //   });
 }
 
 // entrypoint
